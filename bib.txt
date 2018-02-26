@@ -1,0 +1,98 @@
+@Article{Viennot2014,
+  author = {N. Viennot and E. Garcia and J. Nieh},
+  title = {A measurement study of google play. In ACM SIGMETRICS Performance Evaluation Review},
+  Month = jun,
+  Year = 2014,
+  Volume = 42,
+  Pages = {221--233}
+}
+
+@misc{Statista2018,
+  author = {Statista},
+  title = {{Google: global annual revenue 2017}},
+  howpublished = "\url{https://www.statista.com/statistics/444476/google-play-annual-revenue/}",
+  year = {2018}, 
+  Month = feb,
+  note = "[Online; Retrieved 2018-02-21]"
+}
+
+@misc{GooglePayment2018,
+  author = {Google},
+  title = {{Accepted payment methods on Google Play.}},
+  howpublished = "\url{https://support.google.com/googleplay/answer/2651410?hl=en}",
+  year = {2018}, 
+  Month = jan,
+  note = "[Online; Retrieved 2018-02-22]"
+}
+
+@misc{Googlefees2018,
+  author = {Google},
+  title = {{Transaction fees - Play Console Help}},
+  howpublished = "\url{https://support.google.com/googleplay/android-developer/answer/11262}",
+  year = {2018}, 
+  Month = feb,
+  note = "[Online; Retrieved 2018-02-22]"
+}
+
+@Article{Roma2016,
+  author = {P. Roma and D. Ragaglia},
+  title = {Revenue models, in-app purchase, and the app performance: Evidence from Apple’s App Store and Google Play. Electronic commerce research and applications},
+  Month = may,
+  Year = 2016,
+  Volume = 17,
+  Pages = {173--190}
+}
+
+@misc{Callaham2017,
+  author = {J.Callaham},
+  title = {From Android Market to Google Play: a brief history of the Play Store},
+  howpublished = "\url{https://www.androidauthority.com/android-market-google-play-history-754989}",
+  year = {2017}, 
+  Month = mar,
+  note = "[Online; Retrieved 2018-02-22]"
+}
+
+@misc{Whitwam2017,
+  author = {R. Whitwam},
+  title = {Google Will Now Require All App Publishers With Paid Apps Or In-App Purchases To Have An Address On File And Displayed Publicly In Google Play},
+  howpublished = "\url{https://www.androidpolice.com/2014/09/18/google-will-now-require-all-app-publishers-with-paid-apps-or-in-app-purchases-to-have-an-address-on-file-in-google-play/}",
+  year = {2014}, 
+  Month = mar,
+  note = "[Online; Retrieved 2018-02-22]"
+}
+
+@misc{Whitwam2016,
+  author = {R. Whitwam},
+  title = {Google rolling out improved fraud and spam detection in the Play Store},
+  howpublished = "\url{https://www.androidpolice.com/2016/10/31/google-rolling-improved-fraud-spam-detection-play-store/}",
+  year = {2016}, 
+  Month = oct,
+  note = "[Online; Retrieved 2018-02-22]"
+}
+
+@misc{Fingas2017,
+  author = {J. Fingas},
+  title = {Google Play protects your Android phone against rogue apps},
+  howpublished = "\url{https://www.engadget.com/2017/05/17/google-play-protect/}",
+  year = {2017}, 
+  Month = may,
+  note = "[Online; Retrieved 2018-02-22]"
+}
+
+@misc{James2017,
+  author = {V. James},
+  title = {Google is using machine learning to sort good apps from bad on the Play Store},
+  howpublished = "\url{https://www.theverge.com/2017/7/12/15958372/google-machine-learning-ai-app-store-malware-security}",
+  year = {2017}, 
+  Month = jul,
+  note = "[Online; Retrieved 2018-02-22]"
+}
+
+@misc{Balakrishnan2017,
+  author = {A. Balakrishnan},
+  title = {Here's how billions of people use Google products, in one chart},
+  howpublished = "\url{https://www.cnbc.com/2017/05/18/google-user-numbers-youtube-android-drive-photos.html}",
+  year = {2017}, 
+  Month = may,
+  note = "[Online; Retrieved 2018-02-22]"
+}
