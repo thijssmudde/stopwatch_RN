@@ -1,89 +1,52 @@
-import React from 'react'
-import {StyleSheet, Text, View} from 'react-native'
+import React from "react"
+import Expo from "expo";
+import {StyleSheet, Text, View} from "react-native"
+import {Container, Body, Content} from "native-base"
 
-import {
-  Container,
-  Header,
-  Body,
-  Title,
-  Content,
-  List,
-  ListItem,
-  Button
-} from "native-base"
+import {Gradient, AppHeader, HeaderTitle} from "./app/styledComponents/root"
 
-import moment from "moment"
+import StopWatch from "./app/components/stopwatch"
 
 export default class App extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
-      started: false,
-      timestart: null,
-      laps: [
-        {
-          key: 1,
-          time: new moment().unix() - 120
-        }, {
-          key: 2,
-          time: new moment().unix() - 60
-        }
-      ]
+      loading: true //Are assets loaded
     }
   }
 
-  start = () => {
-    const {started} = this.state
+  async componentWillMount() {
+    // Load in fonts
+    await Expo
+      .Font
+      .loadAsync({"gt-walsheim-regular": require("./app/assets/fonts/GT-Walsheim-Regular.ttf"), "gt-walsheim-medium": require("./app/assets/fonts/GT-Walsheim-Medium.ttf"), "gt-walsheim-bold": require("./app/assets/fonts/GT-Walsheim-Bold.ttf")})
 
-    if (started) {
-      this.setState({started: false, timestart: null})
-    } else {
-      this.setState({
-        started: true,
-        timestart: new moment().unix()
-      })
-    }
+    this.setState({loading: false})
   }
 
   render() {
-    const {laps, started} = this.state;
+    if (this.state.loading) { //Show loading screen until all assets are loaded
+      return <Expo.AppLoading/>;
+    } else {
 
-    let time = started ? started.format('HH : mm : ss') : "00:00";
-
-    return (
-      <Container>
-        <Header>
-          <Body>
-            <Title>StopWatch</Title>
-          </Body>
-        </Header>
-        <Content padder>
-          <Text>{time}</Text>
-          <Button full onPress={this.start}>
-            <Text style={styles.button}>{started
-                ? "RESUME"
-                : "START"}</Text>
-          </Button>
-          <Button full onPress={this.stop}>
-            <Text style={styles.button}>{started
-                ? "STOP"
-                : "RESTART"}</Text>
-          </Button>
-          <Button full onPress={this.lap}>
-            <Text style={styles.button}>LAP</Text>
-          </Button>
-          <Text>
-            LAPS: {laps.map(lap => <Text key={lap.key}>Lap {lap.key}: {lap.time}</Text>)}
-          </Text>
-        </Content>
-      </Container>
-    );
+      return (
+        <Container>
+          {/* Styled Gradient */}
+          <Gradient>
+            {/* Styled Header*/}
+            <AppHeader>
+              <Body>
+                {/* Styled Title*/}
+                <HeaderTitle>STOPWATCH</HeaderTitle>
+              </Body>
+            </AppHeader>
+            <Content>
+              <StopWatch/>
+            </Content>
+          </Gradient>
+        </Container>
+      );
+    }
   }
 }
-
-const styles = StyleSheet.create({
-  button: {
-    color: "white"
-  }
-})
