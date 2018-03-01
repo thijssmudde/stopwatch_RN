@@ -2,7 +2,7 @@ Design based on: https://dribbble.com/shots/3121092-Stopwatch/attachments/659902
 
 Todo:
 - Buttons shadows
-- Fix android
+- Set image bottom
 
 Questions:
 - How to make the statusbar light-content

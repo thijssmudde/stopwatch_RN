@@ -1,5 +1,5 @@
-import React from "react"
-import {StyleSheet, Text, View} from "react-native"
+import React from 'react'
+import {StyleSheet, Text, View} from 'react-native'
 
 import {
   Container,
@@ -9,34 +9,36 @@ import {
   Content,
   List,
   ListItem,
-  Button,
   Left,
   Toast
-} from "native-base"
+} from 'native-base'
 
-import moment from "moment" //Easily get timestamps/duration
-import {Constants} from "expo" //StatusBarHeight
-import {Feather} from "@expo/vector-icons" //Feather Icon
+import moment from 'moment' //Easily get timestamps/duration
+import {Constants} from 'expo' //StatusBarHeight
+import {Feather} from '@expo/vector-icons' //Feather Icon
 
 import {
   ButtonText,
   StopwatchView,
   StopwatchTime,
   StopwatchActions,
-  ResetButton,
-  StartButton,
-  StopButton,
-  ResumeButton,
   LapsView,
   LapButton,
   LapNumber,
   LapDuration,
   LapList
-} from "../styledComponents/stopwatch" //Styled components
+} from '../styledComponents/stopwatch' //Styled components
 
-import {formatDuration} from "../helpers" //Show correct time format
+import {formatDuration, getNewLapNumber, accumulateLapDuration} from '../helpers' //Show correct time format
 
-import LapItem from "../components/LapItem"
+import Button from '../components/Button'
+import LapItem from '../components/LapItem'
+
+const defaultLap = {
+  pause: true,
+  lapNumber: -1,
+  lapDuration: -1
+}
 
 export default class StopWatch extends React.Component {
   constructor(props) {
@@ -61,7 +63,7 @@ export default class StopWatch extends React.Component {
         running: true,
         timestart: moment().unix(),
         currentTime: moment().unix(),
-        laps: []
+        laps: [defaultLap]
       }
     }, () => {
       this.startTimer()
@@ -71,9 +73,15 @@ export default class StopWatch extends React.Component {
   resume = () => {
     //update the timestart to continue with same time
     this.setState(state => {
+      const timeDiff = this.state.timestop - this.state.timestart
+      const timestart = moment().unix() - timeDiff;
+
       return {
+        timestart,
+        laps: [
+          defaultLap, ...state.laps
+        ],
         running: true,
-        timestart: moment().unix() - (this.state.timestop - this.state.timestart),
         currentTime: moment().unix()
       }
     }, () => {
@@ -101,33 +109,46 @@ export default class StopWatch extends React.Component {
   }
 
   lap = () => { //Press LAP
-    const {running, laps} = this.state
+    const {running} = this.state
 
-    if (running) {
-      this.setState({
-        //add lap at at beginning
-        laps: [
-          moment().unix(),
-          ...laps
-        ]
+    if (running) { //Only add lap if its running
+      this.setState((state) => {
+        let lapDuration;
+        if (state.laps[0] === false) { //It was resumed
+          lapDuration = moment().unix() - state.timestart
+        } else { //2nd or more laps
+          let totalLapsTime = accumulateLapDuration(state.laps)
+          lapDuration = moment().unix() - state.timestart - totalLapsTime
+        }
+
+        let lapNumber = getNewLapNumber(state.laps)
+
+        let lap = {
+          lapDuration,
+          lapNumber
+        }
+
+        return {
+          //Add lap at the beginning
+          laps: [
+            lap, ...state.laps
+          ]
+        }
       })
-    } else {
-      Toast.show({text: "StopWatch is not running!", position: "bottom", buttonText: "Hide", type: "danger"})
+    } else { //Display Toast
+      Toast.show({text: 'StopWatch is not running!', position: 'bottom', buttonText: 'Hide', type: 'danger'})
     }
   }
 
-  renderTimestamp = (lap, index) => {
-    const {laps} = this.state
-    let {timestart} = this.state
-
-    //check if previous lap exists
-    if (laps && laps[index + 1]) {
-      timestart = laps[index + 1]
+  renderTimestamp = (lap, index) => { //No hard calculations, just render responsibility
+    if (lap.pause === true) {
+      return null
     }
+    const {laps} = this.state
 
-    let lapNumber = laps.length - index;
+    let lapNumber = lap.lapNumber;
 
-    let duration = moment.duration((lap - timestart) * 1000)
+    let duration = moment.duration(lap.lapDuration * 1000)
     let formattedDuration = formatDuration(duration)
 
     return <LapItem key={index} lapNumber={lapNumber} duration={formattedDuration}/>
@@ -143,35 +164,30 @@ export default class StopWatch extends React.Component {
 
     return (
       <StopwatchView>
-
         <StopwatchTime>{stopwatchTime}</StopwatchTime>
 
         <StopwatchActions>
           {/* RESTART */}
-          {!running && timestart && <ResetButton rounded block onPress={this.start}>
-            <ButtonText>RESET</ButtonText>
-          </ResetButton>}
+          {!running && timestart && <Button type='reset' onPress={this.start}>
+          </Button>}
 
           {/* START */}
-          {!running && !timestart && <StartButton rounded block onPress={this.start}>
-            <ButtonText>START</ButtonText>
-          </StartButton>}
+          {!running && !timestart && <Button type='start' onPress={this.start}>
+          </Button>}
 
           {/* RESUME */}
-          {!running && timestart && <ResumeButton rounded block onPress={this.resume}>
-            <ButtonText>RESUME</ButtonText>
-          </ResumeButton>}
+          {!running && timestart && <Button type='resume' onPress={this.resume}>
+          </Button>}
 
           {/* STOP */}
-          {running && timestart && <StopButton rounded block onPress={this.stop}>
-            <ButtonText>STOP</ButtonText>
-          </StopButton>}
+          {running && timestart && <Button type='stop' onPress={this.stop}>
+          </Button>}
         </StopwatchActions>
 
         <LapsView>
           {/* Adding laps */}
           <LapButton onPress={this.lap} running={running}>
-            <Feather name="plus" size={32} color="#333"/>
+            <Feather name='plus' size={32} color='#333'/>
           </LapButton>
 
           {/* A cool list of laps */}

@@ -2,14 +2,6 @@ import styled from "styled-components"
 import {Text, View} from "react-native"
 import {Button, List, ListItem} from "native-base"
 
-//Attach color props to the LinearGradient
-export const ButtonText = styled.Text `
-  fontFamily: gt-walsheim-bold;
-  color: #333;
-  fontSize: 18;
-  letterSpacing: 2;
-`
-
 export const StopwatchView = styled.View `
   top: 100;
   justifyContent: center;
@@ -27,30 +19,6 @@ export const StopwatchActions = styled.View `
   display: flex;
   flexDirection: row;
   marginTop: 25;
-`
-
-export const ResetButton = styled(Button)`
-  backgroundColor: #FFF;
-  marginHorizontal: 30;
-  flex: 1;
-`
-
-export const StartButton = styled(Button)`
-  backgroundColor: #E2E419;
-  marginHorizontal: 30;
-  flex: 1;
-`
-
-export const StopButton = styled(Button)`
-  backgroundColor: #E42B6B;
-  marginHorizontal: 30;
-  flex: 1;
-`
-
-export const ResumeButton = styled(Button)`
-  backgroundColor: #39B54A;
-  marginHorizontal: 30;
-  flex: 1;
 `
 
 // Laps

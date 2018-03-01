@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 import {Dimensions, Platform} from "react-native"
 import {Header, Title, Body} from "native-base"
-import {LinearGradient, Constants} from "expo";
+import {LinearGradient, Constants} from "expo"
 
 import Image from "react-native-remote-svg"
 
