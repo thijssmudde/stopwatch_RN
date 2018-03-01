@@ -15,3 +15,12 @@ Done:
 7. RESTART clears all the laps and zeroes the times.
 8. Resume makes the timer continue.
 9. Use proper colors for the buttons.
+
+How to run:
+
+git clone https://github.com/fullhdpixel/stopwatch_RN.git
+cd stopwatch_RN
+yarn install
+yarn start
+
+yarn ios/android
