@@ -1,13 +1,10 @@
 Design based on: https://dribbble.com/shots/3121092-Stopwatch/attachments/659902
 
 Todo:
-- Buttons shadows
 - Set image bottom
 
 Questions:
 - How to make the statusbar light-content
-- How to resume properly? It doesn't count directly
-- Do you have a way to use the same variable name for LapItem? Now Its called LapItemStyled, but I want to maintain LapItem.
 
 Done:
 1. Pressing the START button starts the timer. The elapsed time in minutes and seconds is displayed at the top.

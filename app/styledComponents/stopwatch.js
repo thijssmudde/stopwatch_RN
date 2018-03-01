@@ -22,7 +22,7 @@ export const StopwatchActions = styled.View `
 `
 
 // Laps
-export const LapsView = styled.View`
+export const LapsView = styled.View `
   width: 100%;
   marginLeft: 60;
 `
@@ -33,8 +33,18 @@ export const LapButton = styled(Button)`
   width: 50;
   height: 50;
   borderRadius: 25;
-  backgroundColor: ${props => props.running ? '#fff' : '#ccc'};
+  backgroundColor: ${props => props.running
+  ? '#fff'
+  : '#ccc'};
   justifyContent: center;
+
+  ${props => props.running && `
+    shadowColor: #000;
+    shadowOffset: 0px 12px;
+    shadowOpacity: 0.58;
+    shadowRadius: 16.00px;
+    elevation: 24px;
+  `}
 `
 
 export const LapNumber = styled.Text `
