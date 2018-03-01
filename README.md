@@ -1,5 +1,9 @@
 Design based on: https://dribbble.com/shots/3121092-Stopwatch/attachments/659902
 
+Todo:
+- Buttons shadows
+- Fix android
+
 Questions:
 - How to make the statusbar light-content
 - How to resume properly? It doesn't count directly

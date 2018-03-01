@@ -31,11 +31,12 @@ import {
   LapButton,
   LapNumber,
   LapDuration,
-  LapList,
-  LapItemStyled
+  LapList
 } from "../styledComponents/stopwatch" //Styled components
 
 import {formatDuration} from "../helpers" //Show correct time format
+
+import LapItem from "../components/LapItem"
 
 export default class StopWatch extends React.Component {
   constructor(props) {
@@ -70,16 +71,18 @@ export default class StopWatch extends React.Component {
   resume = () => {
     //update the timestart to continue with same time
     this.setState(state => {
-      let timestart = moment().unix() - (this.state.timestop - this.state.timestart)
-
-      return {running: true, timestart}
+      return {
+        running: true,
+        timestart: moment().unix() - (this.state.timestop - this.state.timestart),
+        currentTime: moment().unix()
+      }
     }, () => {
       this.startTimer()
     })
   }
 
   startTimer = () => {
-    this.timer = setInterval(this.setCurrentTime, 1000)
+    this.timer = setInterval(this.setCurrentTime, 1000) //Every second
   }
 
   setCurrentTime = () => {
@@ -127,7 +130,7 @@ export default class StopWatch extends React.Component {
     let duration = moment.duration((lap - timestart) * 1000)
     let formattedDuration = formatDuration(duration)
 
-    return <LapItemStyled key={index} lapNumber={lapNumber} duration={formattedDuration}/>
+    return <LapItem key={index} lapNumber={lapNumber} duration={formattedDuration}/>
   }
 
   render() {

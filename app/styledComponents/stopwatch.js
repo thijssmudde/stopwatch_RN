@@ -2,8 +2,6 @@ import styled from "styled-components"
 import {Text, View} from "react-native"
 import {Button, List, ListItem} from "native-base"
 
-import LapItem from "../components/LapItem"
-
 //Attach color props to the LinearGradient
 export const ButtonText = styled.Text `
   fontFamily: gt-walsheim-bold;
@@ -91,6 +89,6 @@ export const LapList = styled(List)`
   top: 40;
 `
 
-export const LapItemStyled = styled(LapItem)`
+export const LapItemStyled = styled(ListItem)`
   borderBottomWidth: 0;
 `
