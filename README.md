@@ -1,5 +1,9 @@
 Design based on: https://dribbble.com/shots/3121092-Stopwatch/attachments/659902
 
+Questions:
+- How to make the statusbar light-content
+- How to resume properly? It doesn't count directly
+- Do you have a way to use the same variable name for LapItem? Now Its called LapItemStyled, but I want to maintain LapItem.
 
 Done:
 1. Pressing the START button starts the timer. The elapsed time in minutes and seconds is displayed at the top.
@@ -11,10 +15,3 @@ Done:
 7. RESTART clears all the laps and zeroes the times.
 8. Resume makes the timer continue.
 9. Use proper colors for the buttons.
-
-Questions:
-- Make the statusbar light-content
-
-2 problems:
-- Resuming doesnt count directly
-- Pressing lap only when running

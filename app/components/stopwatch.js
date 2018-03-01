@@ -29,10 +29,10 @@ import {
   ResumeButton,
   LapsView,
   LapButton,
-  LapList,
-  LapItem,
   LapNumber,
-  LapDuration
+  LapDuration,
+  LapList,
+  LapItemStyled
 } from "../styledComponents/stopwatch" //Styled components
 
 import {formatDuration} from "../helpers" //Show correct time format
@@ -107,12 +107,7 @@ export default class StopWatch extends React.Component {
         ]
       })
     } else {
-      Toast.show({
-        text: "StopWatch is not running!",
-        position: "bottom",
-        buttonText: "Hide",
-        type: "danger"
-      })
+      Toast.show({text: "StopWatch is not running!", position: "bottom", buttonText: "Hide", type: "danger"})
     }
   }
 
@@ -125,26 +120,21 @@ export default class StopWatch extends React.Component {
       timestart = laps[index + 1]
     }
 
+    let lapNumber = laps.length - index;
+
     let duration = moment.duration((lap - timestart) * 1000)
     let formattedDuration = formatDuration(duration)
 
-    return (
-      <LapItem key={index}>
-        <LapNumber>Lap {laps.length - index}</LapNumber>
-        <LapDuration>{formattedDuration}</LapDuration>
-      </LapItem>
-    )
+    return <LapItemStyled key={index} lapNumber={lapNumber} duration={formattedDuration}/>
   }
 
   render() {
     const {laps, running, currentTime, timestart} = this.state
 
-    const duration = moment.duration((currentTime - timestart) * 1000)
-    // const stopwatchTime = duration.asMilliseconds() >= 0 ?
-    // formatDuration(duration) : "00:00:00"
-    const stopwatchTime = formatDuration(duration)
+    const duration = moment.duration((currentTime - timestart) * 1000) //Calculate duration
+    const stopwatchTime = formatDuration(duration) //Format properly, just like timestamp
 
-    const lapListItems = laps.map(this.renderTimestamp)
+    const lapListItems = laps.map(this.renderTimestamp) //Render one LapItem
 
     return (
       <StopwatchView>

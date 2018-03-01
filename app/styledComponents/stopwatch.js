@@ -1,6 +1,8 @@
-import styled from "styled-components";
+import styled from "styled-components"
 import {Text, View} from "react-native"
 import {Button, List, ListItem} from "native-base"
+
+import LapItem from "../components/LapItem"
 
 //Attach color props to the LinearGradient
 export const ButtonText = styled.Text `
@@ -69,16 +71,6 @@ export const LapButton = styled(Button)`
   justifyContent: center;
 `
 
-export const LapList = styled(List)`
-  position: absolute;
-  right: 60;
-  top: 40;
-`
-
-export const LapItem = styled(ListItem)`
-  borderBottomWidth: 0;
-`
-
 export const LapNumber = styled.Text `
   color: #fff;
   fontFamily: gt-pressura-mono-bold;
@@ -91,4 +83,14 @@ export const LapDuration = styled.Text `
   fontSize: 22;
   alignSelf: flex-end;
   marginLeft: 50;
+`
+
+export const LapList = styled(List)`
+  position: absolute;
+  right: 60;
+  top: 40;
+`
+
+export const LapItemStyled = styled(LapItem)`
+  borderBottomWidth: 0;
 `
