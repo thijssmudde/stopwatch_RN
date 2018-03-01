@@ -1,5 +1,5 @@
-import React from 'react'
-import {StyleSheet, Text, View} from 'react-native'
+import React from "react"
+import {StyleSheet, Text, View} from "react-native"
 
 import {
   Container,
@@ -10,12 +10,31 @@ import {
   List,
   ListItem,
   Button,
-  H1
+  Left,
+  Toast
 } from "native-base"
 
-import moment from "moment"
+import moment from "moment" //Easily get timestamps/duration
+import {Constants} from "expo" //StatusBarHeight
+import {Feather} from "@expo/vector-icons" //Feather Icon
 
-import styles from "./stopwatchStyles"
+import {
+  ButtonText,
+  StopwatchView,
+  StopwatchTime,
+  StopwatchActions,
+  ResetButton,
+  StartButton,
+  StopButton,
+  ResumeButton,
+  LapsView,
+  LapButton,
+  LapList,
+  LapItem,
+  LapNumber,
+  LapDuration
+} from "../styledComponents/stopwatch" //Styled components
+
 import {formatDuration} from "../helpers" //Show correct time format
 
 export default class StopWatch extends React.Component {
@@ -26,7 +45,8 @@ export default class StopWatch extends React.Component {
       running: false,
       currentTime: null,
       timestart: null,
-      laps: []
+      laps: [],
+      showToast: false
     }
   }
 
@@ -35,23 +55,27 @@ export default class StopWatch extends React.Component {
   }
 
   start = () => { //Press START/RESTART
-    this.setState({
-      running: true,
-      timestart: moment().unix(),
-      currentTime: moment().unix(),
-      laps: []
+    this.setState(state => {
+      return {
+        running: true,
+        timestart: moment().unix(),
+        currentTime: moment().unix(),
+        laps: []
+      }
+    }, () => {
+      this.startTimer()
     })
-
-    this.startTimer()
   }
 
   resume = () => {
     //update the timestart to continue with same time
-    let timestart = moment().unix() - (this.state.timestop - this.state.timestart);
+    this.setState(state => {
+      let timestart = moment().unix() - (this.state.timestop - this.state.timestart)
 
-    this.setState({running: true, timestart})
-
-    this.startTimer()
+      return {running: true, timestart}
+    }, () => {
+      this.startTimer()
+    })
   }
 
   startTimer = () => {
@@ -72,10 +96,24 @@ export default class StopWatch extends React.Component {
   }
 
   lap = () => { //Press LAP
-    this.setState({
-      //add lap
-      laps: [moment().unix()].concat(this.state.laps)
-    })
+    const {running, laps} = this.state
+
+    if (running) {
+      this.setState({
+        //add lap at at beginning
+        laps: [
+          moment().unix(),
+          ...laps
+        ]
+      })
+    } else {
+      Toast.show({
+        text: "StopWatch is not running!",
+        position: "bottom",
+        buttonText: "Hide",
+        type: "danger"
+      })
+    }
   }
 
   renderTimestamp = (lap, index) => {
@@ -91,68 +129,62 @@ export default class StopWatch extends React.Component {
     let formattedDuration = formatDuration(duration)
 
     return (
-      <ListItem key={index}>
-        <Text>{formattedDuration}</Text>
-      </ListItem>
+      <LapItem key={index}>
+        <LapNumber>Lap {laps.length - index}</LapNumber>
+        <LapDuration>{formattedDuration}</LapDuration>
+      </LapItem>
     )
   }
 
   render() {
-    const {laps, running, timestart, currentTime} = this.state
+    const {laps, running, currentTime, timestart} = this.state
 
-    let duration = moment.duration((currentTime - timestart) * 1000)
-    let stopwatchTime = formatDuration(duration)
+    const duration = moment.duration((currentTime - timestart) * 1000)
+    // const stopwatchTime = duration.asMilliseconds() >= 0 ?
+    // formatDuration(duration) : "00:00:00"
+    const stopwatchTime = formatDuration(duration)
 
-    let times = laps.map(this.renderTimestamp)
-
-    // console.log("timestart", timestart)
+    const lapListItems = laps.map(this.renderTimestamp)
 
     return (
-      <View>
-        {/* START */}
-        {!running && !timestart && <Button rounded block style={styles.start}
-         onPress={this.start}>
-          <Text style={styles.button}>START</Text>
-        </Button>}
+      <StopwatchView>
 
-        {/* RESUME */}
-        {!running && timestart && <Button rounded block style={styles.resume}
-         onPress={this.resume}>
-          <Text style={styles.button}>RESUME</Text>
-        </Button>}
+        <StopwatchTime>{stopwatchTime}</StopwatchTime>
 
-        {/* RESTART */}
-        {!running && timestart && <Button rounded block style={styles.restart}
-         onPress={this.start}>
-          <Text style={styles.button}>RESTART</Text>
-        </Button>}
+        <StopwatchActions>
+          {/* RESTART */}
+          {!running && timestart && <ResetButton rounded block onPress={this.start}>
+            <ButtonText>RESET</ButtonText>
+          </ResetButton>}
 
-        {/* STOP */}
-        {running && timestart && <Button rounded block style={styles.stop}
-         onPress={this.stop}>
-          <Text style={styles.button}>STOP</Text>
-        </Button>}
+          {/* START */}
+          {!running && !timestart && <StartButton rounded block onPress={this.start}>
+            <ButtonText>START</ButtonText>
+          </StartButton>}
 
-        {/* LAP */}
-        {running && <Button roundedblock style={styles.lap}
-         onPress={this.lap}>
-          <Text style={styles.button}>LAP</Text>
-        </Button>}
+          {/* RESUME */}
+          {!running && timestart && <ResumeButton rounded block onPress={this.resume}>
+            <ButtonText>RESUME</ButtonText>
+          </ResumeButton>}
 
-        <Text style={styles.time}>{stopwatchTime}</Text>
+          {/* STOP */}
+          {running && timestart && <StopButton rounded block onPress={this.stop}>
+            <ButtonText>STOP</ButtonText>
+          </StopButton>}
+        </StopwatchActions>
 
-        {/* List divider explanation */}
-        {!!laps.length && <List>
-          <ListItem itemDivider first>
-            <H1>LAPS: {laps.length}</H1>
-          </ListItem>
-        </List>}
+        <LapsView>
+          {/* Adding laps */}
+          <LapButton onPress={this.lap} running={running}>
+            <Feather name="plus" size={32} color="#333"/>
+          </LapButton>
 
-        {/* A cool list of laps */}
-        {!!laps.length && <List>
-          {times}
-        </List>}
-      </View>
+          {/* A cool list of laps */}
+          <LapList>
+            {lapListItems}
+          </LapList>
+        </LapsView>
+      </StopwatchView>
     )
   }
 }

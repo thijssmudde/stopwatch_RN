@@ -1,4 +1,4 @@
-TODO:
+Design based on: https://dribbble.com/shots/3121092-Stopwatch/attachments/659902
 
 
 Done:
@@ -11,3 +11,10 @@ Done:
 7. RESTART clears all the laps and zeroes the times.
 8. Resume makes the timer continue.
 9. Use proper colors for the buttons.
+
+Questions:
+- Make the statusbar light-content
+
+2 problems:
+- Resuming doesnt count directly
+- Pressing lap only when running
