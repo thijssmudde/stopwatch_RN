@@ -1,11 +1,5 @@
 Design based on: https://dribbble.com/shots/3121092-Stopwatch/attachments/659902
 
-Todo:
-- Set image bottom
-
-Questions:
-- How to make the statusbar light-content
-
 Done:
 1. Pressing the START button starts the timer. The elapsed time in minutes and seconds is displayed at the top.
 2. When the stopwatch measure the time, display STOP and LAP buttons.
@@ -24,4 +18,5 @@ cd stopwatch_RN
 yarn install
 yarn start
 
-yarn ios/android
+yarn ios
+yarn android

@@ -136,8 +136,8 @@ export default class StopWatch extends React.Component {
 
     return (
       <StopWatchView>
-
-          <StatusBar barStyle="light-content"/>
+        <StatusBar barStyle="light-content"/>
+        
         <StopWatchTime>{duration}</StopWatchTime>
 
         <StopWatchActions>
