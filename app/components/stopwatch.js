@@ -1,24 +1,8 @@
 import React from 'react'
-import {StyleSheet, Text, View} from 'react-native'
-
-import {
-  Container,
-  Header,
-  Body,
-  Title,
-  Content,
-  List,
-  ListItem,
-  Left,
-  Toast
-} from 'native-base'
-
+import {Toast} from 'native-base'
 import moment from 'moment' //Easily get timestamps/duration
-import {Constants} from 'expo' //StatusBarHeight
 import {Feather} from '@expo/vector-icons' //Feather Icon
-
 import {
-  ButtonText,
   StopwatchView,
   StopwatchTime,
   StopwatchActions,
@@ -28,9 +12,7 @@ import {
   LapDuration,
   LapList
 } from '../styledComponents/stopwatch' //Styled components
-
 import {formatDuration, getNewLapNumber, accumulateLapDuration} from '../helpers' //Show correct time format
-
 import Button from '../components/Button'
 import LapItem from '../components/LapItem'
 
@@ -90,13 +72,11 @@ export default class StopWatch extends React.Component {
   }
 
   startTimer = () => {
-    this.timer = setInterval(this.setCurrentTime, 1000) //Every second
-  }
-
-  setCurrentTime = () => {
-    this.setState({
-      currentTime: moment().unix()
-    })
+    this.timer = setInterval(() => {
+      this.setState({
+        currentTime: moment().unix()
+      })
+    }, 1000)
   }
 
   stop = () => { //Press STOP
@@ -113,25 +93,21 @@ export default class StopWatch extends React.Component {
 
     if (running) { //Only add lap if its running
       this.setState((state) => {
-        let lapDuration;
-        if (state.laps[0] === false) { //It was resumed
-          lapDuration = moment().unix() - state.timestart
-        } else { //2nd or more laps
-          let totalLapsTime = accumulateLapDuration(state.laps)
-          lapDuration = moment().unix() - state.timestart - totalLapsTime
-        }
-
-        let lapNumber = getNewLapNumber(state.laps)
-
-        let lap = {
-          lapDuration,
-          lapNumber
+        let lapDuration = moment().unix() - state.timestart;
+        if (state.laps[0] !== false) { //It was not resumed
+          //2nd or more laps
+          const totalLapsTime = accumulateLapDuration(state.laps)
+          lapDuration -= totalLapsTime
         }
 
         return {
           //Add lap at the beginning
           laps: [
-            lap, ...state.laps
+            {
+              lapDuration,
+              lapNumber: getNewLapNumber(state.laps)
+            },
+            ...state.laps
           ]
         }
       })
@@ -140,48 +116,31 @@ export default class StopWatch extends React.Component {
     }
   }
 
-  renderTimestamp = (lap, index) => { //No hard calculations, just render responsibility
-    if (lap.pause === true) {
-      return null
-    }
-    const {laps} = this.state
-
-    let lapNumber = lap.lapNumber;
-
-    let duration = moment.duration(lap.lapDuration * 1000)
-    let formattedDuration = formatDuration(duration)
-
-    return <LapItem key={index} lapNumber={lapNumber} duration={formattedDuration}/>
+  renderTimestamp = (lap, index) => {
+    return lap.pause === true
+      ? null
+      : <LapItem
+        key={index}
+        lapNumber={lap.lapNumber}
+        duration={formatDuration(lap.lapDuration)}/>
   }
 
   render() {
     const {laps, running, currentTime, timestart} = this.state
 
-    const duration = moment.duration((currentTime - timestart) * 1000) //Calculate duration
-    const stopwatchTime = formatDuration(duration) //Format properly, just like timestamp
+    const duration = formatDuration(currentTime - timestart) //Format properly, just like timestamp
 
     const lapListItems = laps.map(this.renderTimestamp) //Render one LapItem
 
     return (
       <StopwatchView>
-        <StopwatchTime>{stopwatchTime}</StopwatchTime>
+        <StopwatchTime>{duration}</StopwatchTime>
 
         <StopwatchActions>
-          {/* RESTART */}
-          {!running && timestart && <Button type='reset' onPress={this.start}>
-          </Button>}
-
-          {/* START */}
-          {!running && !timestart && <Button type='start' onPress={this.start}>
-          </Button>}
-
-          {/* RESUME */}
-          {!running && timestart && <Button type='resume' onPress={this.resume}>
-          </Button>}
-
-          {/* STOP */}
-          {running && timestart && <Button type='stop' onPress={this.stop}>
-          </Button>}
+          {!running && timestart && <Button type='reset' onPress={this.start}/>}
+          {!running && !timestart && <Button type='start' onPress={this.start}/>}
+          {running && timestart && <Button type='stop' onPress={this.stop}/>}
+          {!running && timestart && <Button type='resume' onPress={this.resume}/>}
         </StopwatchActions>
 
         <LapsView>

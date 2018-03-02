@@ -1,14 +1,14 @@
-import styled from "styled-components"
+import styled from 'styled-components'
 
-import {Dimensions, Platform} from "react-native"
-import {Header, Title, Body} from "native-base"
-import {LinearGradient, Constants} from "expo"
+import {Dimensions, Platform} from 'react-native'
+import {Header, Title, Body} from 'native-base'
+import {LinearGradient, Constants} from 'expo'
 
-import Image from "react-native-remote-svg"
+import Image from 'react-native-remote-svg'
 
 //Attach color props to the LinearGradient
 export const Gradient = styled(LinearGradient).attrs({
-  colors: ["#392F83", "#33306A", "#252B45"]
+  colors: ['#392F83', '#33306A', '#252B45']
 })`
   position: absolute;
   left: 0;
@@ -20,7 +20,7 @@ export const Gradient = styled(LinearGradient).attrs({
 export const AppHeader = styled(Header)`
   backgroundColor: transparent;
   borderBottomWidth: 0;
-  top: ${Platform.OS === "android"
+  top: ${Platform.OS === 'android'
   ? Constants.statusBarHeight
   : 0};
 `
@@ -40,8 +40,8 @@ export const HeaderTitle = styled(Title)`
 
 export const Pyramid = styled(Image)`
   position: absolute;
-  width: ${Dimensions.get("window").width};
-  height: ${Dimensions.get("window").height};
+  width: ${Dimensions.get('window').width};
+  height: ${Dimensions.get('window').height};
   top: 120;
   left: 0;
   z-index: -1;

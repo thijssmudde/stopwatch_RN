@@ -1,7 +1,6 @@
-import React from "react"
-import {ListItem} from "native-base"
+import React from 'react'
 
-import {LapItemStyled, LapNumber, LapDuration} from "../styledComponents/stopwatch"
+import {LapItemStyled, LapNumber, LapDuration} from '../styledComponents/stopwatch'
 
 const LapItem = (props) => {
   return (

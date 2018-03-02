@@ -1,11 +1,18 @@
 import React from "react"
-import Expo from "expo"; //Loading Screen
-import {Platform, Text, StyleSheet, View} from "react-native"
+import Expo from "expo"; //Loading Screen, loading fonts
+import {Platform, View} from "react-native"
 import {Root, Container} from "native-base"
 
-import {Gradient, AppHeader, AppHeaderSide, AppHeaderBody, HeaderTitle, Pyramid} from "./app/styledComponents/app"
+import {
+  Gradient,
+  AppHeader,
+  AppHeaderSide,
+  AppHeaderBody,
+  HeaderTitle,
+  Pyramid
+} from "./app/styledComponents/app"
 
-import StopWatch from "./app/components/stopwatch"
+import StopWatch from "./app/components/StopWatch"
 
 export default class App extends React.Component {
   constructor(props) {
@@ -17,7 +24,7 @@ export default class App extends React.Component {
   }
 
   async componentWillMount() {
-    // Load in fonts first
+    // Load in fonts
     await Expo
       .Font
       .loadAsync({"gt-walsheim-regular": require("./app/assets/fonts/GT-Pressura-Mono-Regular.ttf"), "gt-walsheim-medium": require("./app/assets/fonts/GT-Walsheim-Medium.ttf"), "gt-walsheim-bold": require("./app/assets/fonts/GT-Walsheim-Bold.ttf"), "gt-pressura-mono-regular": require("./app/assets/fonts/GT-Pressura-Mono-Regular.ttf"), "gt-pressura-mono-bold": require("./app/assets/fonts/GT-Pressura-Mono-Bold.ttf")})
@@ -43,16 +50,13 @@ export default class App extends React.Component {
             <Gradient>
               {/* Styled Header */}
               <AppHeader noShadow>
-                  {/* Styled Body */}
+                {/* Styled Body */}
                 <AppHeaderBody>
                   {/* Styled Title */}
                   <HeaderTitle>STOPWATCH</HeaderTitle>
                 </AppHeaderBody>
               </AppHeader>
-              <View>
-                <StopWatch/>
-              </View>
-              {/* Styled Image */}
+              <StopWatch/>
               <Pyramid source={require("./app/assets/img/pyramid.svg")}/>
             </Gradient>
           </Container>

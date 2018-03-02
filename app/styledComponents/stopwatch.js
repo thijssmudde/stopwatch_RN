@@ -1,6 +1,6 @@
-import styled from "styled-components"
-import {Text, View} from "react-native"
-import {Button, List, ListItem} from "native-base"
+import styled from 'styled-components'
+import {Text, View} from 'react-native'
+import {Button, List, ListItem} from 'native-base'
 
 export const StopwatchView = styled.View `
   top: 100;
