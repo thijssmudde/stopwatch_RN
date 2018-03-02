@@ -1,6 +1,5 @@
 import React from 'react'
-
-import {LapItemStyled, LapNumber, LapDuration} from '../styledComponents/stopwatch'
+import {LapItemStyled, LapNumber, LapDuration} from '../StyledComponents/StopWatch'
 
 const LapItem = (props) => {
   return (

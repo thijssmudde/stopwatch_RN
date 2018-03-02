@@ -9,10 +9,12 @@ import {
   AppHeaderSide,
   AppHeaderBody,
   HeaderTitle,
+  PyramidView,
   Pyramid
-} from "./app/styledComponents/app"
+} from "./App/StyledComponents/App"
 
-import StopWatch from "./app/components/StopWatch"
+import Images from "./App/Themes/Images"
+import StopWatch from "./App/Components/StopWatch"
 
 export default class App extends React.Component {
   constructor(props) {
@@ -27,7 +29,7 @@ export default class App extends React.Component {
     // Load in fonts
     await Expo
       .Font
-      .loadAsync({"gt-walsheim-regular": require("./app/assets/fonts/GT-Pressura-Mono-Regular.ttf"), "gt-walsheim-medium": require("./app/assets/fonts/GT-Walsheim-Medium.ttf"), "gt-walsheim-bold": require("./app/assets/fonts/GT-Walsheim-Bold.ttf"), "gt-pressura-mono-regular": require("./app/assets/fonts/GT-Pressura-Mono-Regular.ttf"), "gt-pressura-mono-bold": require("./app/assets/fonts/GT-Pressura-Mono-Bold.ttf")})
+      .loadAsync({"gt-walsheim-regular": require("./App/Assets/Fonts/GT-Pressura-Mono-Regular.ttf"), "gt-walsheim-medium": require("./App/Assets/Fonts/GT-Walsheim-Medium.ttf"), "gt-walsheim-bold": require("./App/Assets/Fonts/GT-Walsheim-Bold.ttf"), "gt-pressura-mono-regular": require("./App/Assets/Fonts/GT-Pressura-Mono-Regular.ttf"), "gt-pressura-mono-bold": require("./App/Assets/Fonts/GT-Pressura-Mono-Bold.ttf")})
 
     if (Platform.OS === "android") {
       await Expo
@@ -57,7 +59,13 @@ export default class App extends React.Component {
                 </AppHeaderBody>
               </AppHeader>
               <StopWatch/>
-              <Pyramid source={require("./app/assets/img/pyramid.svg")}/>
+              <PyramidView>
+                {/* The svg doesnt show on Android, only when you scroll to the right */}
+                {/* <Pyramid source={Images.pyramidSVG}/> */}
+
+                {/*  */}
+                <Pyramid source={Images.pyramidPNG}/>
+              </PyramidView>
             </Gradient>
           </Container>
         </Root>

@@ -1,20 +1,22 @@
 import React from 'react'
+import {StatusBar} from "react-native"
+
 import {Toast} from 'native-base'
 import moment from 'moment' //Easily get timestamps/duration
 import {Feather} from '@expo/vector-icons' //Feather Icon
 import {
-  StopwatchView,
-  StopwatchTime,
-  StopwatchActions,
+  StopWatchView,
+  StopWatchTime,
+  StopWatchActions,
   LapsView,
   LapButton,
   LapNumber,
   LapDuration,
   LapList
-} from '../styledComponents/stopwatch' //Styled components
+} from '../StyledComponents/StopWatch' //Styled components
 import {formatDuration, getNewLapNumber, accumulateLapDuration} from '../helpers' //Show correct time format
-import Button from '../components/Button'
-import LapItem from '../components/LapItem'
+import Button from '../Components/Button'
+import LapItem from '../Components/LapItem'
 
 const defaultLap = {
   pause: true,
@@ -133,28 +135,27 @@ export default class StopWatch extends React.Component {
     const lapListItems = laps.map(this.renderTimestamp) //Render one LapItem
 
     return (
-      <StopwatchView>
-        <StopwatchTime>{duration}</StopwatchTime>
+      <StopWatchView>
 
-        <StopwatchActions>
+          <StatusBar barStyle="light-content"/>
+        <StopWatchTime>{duration}</StopWatchTime>
+
+        <StopWatchActions>
           {!running && timestart && <Button type='reset' onPress={this.start}/>}
           {!running && !timestart && <Button type='start' onPress={this.start}/>}
           {running && timestart && <Button type='stop' onPress={this.stop}/>}
           {!running && timestart && <Button type='resume' onPress={this.resume}/>}
-        </StopwatchActions>
+        </StopWatchActions>
 
         <LapsView>
-          {/* Adding laps */}
           <LapButton onPress={this.lap} running={running}>
             <Feather name='plus' size={32} color='#333'/>
           </LapButton>
-
-          {/* A cool list of laps */}
           <LapList>
             {lapListItems}
           </LapList>
         </LapsView>
-      </StopwatchView>
+      </StopWatchView>
     )
   }
 }

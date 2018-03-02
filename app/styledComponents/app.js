@@ -9,12 +9,14 @@ import Image from 'react-native-remote-svg'
 //Attach color props to the LinearGradient
 export const Gradient = styled(LinearGradient).attrs({
   colors: ['#392F83', '#33306A', '#252B45']
+  // colors: ['red', 'blue', 'yellow']
 })`
-  position: absolute;
+  position: relative;
   left: 0;
   right: 0;
   top: 0;
   height: 100%;
+  width: 100%;
 `
 
 export const AppHeader = styled(Header)`
@@ -38,11 +40,21 @@ export const HeaderTitle = styled(Title)`
   textAlign: center;
 `;
 
+export const PyramidView = styled
+  .View
+  .attrs({pointerEvents: 'none'})`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  zIndex: -1;
+`
+
 export const Pyramid = styled(Image)`
   position: absolute;
-  width: ${Dimensions.get('window').width};
-  height: ${Dimensions.get('window').height};
-  top: 120;
-  left: 0;
-  z-index: -1;
+  bottom: 0;
+  width: 100%;
+  height: 55%;
+  zIndex: -1;
 `

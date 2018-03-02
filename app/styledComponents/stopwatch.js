@@ -2,20 +2,20 @@ import styled from 'styled-components'
 import {Text, View} from 'react-native'
 import {Button, List, ListItem} from 'native-base'
 
-export const StopwatchView = styled.View `
+export const StopWatchView = styled.View `
   top: 100;
   justifyContent: center;
   alignItems: center;
 `
 
-export const StopwatchTime = styled.Text `
+export const StopWatchTime = styled.Text `
   fontFamily: gt-pressura-mono-bold;
   color: #fff;
   letterSpacing: 0;
   fontSize: 72;
 `
 
-export const StopwatchActions = styled.View `
+export const StopWatchActions = styled.View `
   display: flex;
   flexDirection: row;
   marginTop: 25;

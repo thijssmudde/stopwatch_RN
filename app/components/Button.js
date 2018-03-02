@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 
-import {ButtonStyled, ButtonText} from '../styledComponents/button'
+import {ButtonStyled, ButtonText} from '../StyledComponents/Button'
 
 export default class Button extends React.Component {
   render() {
