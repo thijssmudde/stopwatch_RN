@@ -42,7 +42,7 @@ export const Pyramid = styled(Image)`
   position: absolute;
   width: ${Dimensions.get("window").width};
   height: ${Dimensions.get("window").height};
-  bottom: 0;
-  right: 0;
+  top: 120;
+  left: 0;
   z-index: -1;
 `

@@ -52,9 +52,9 @@ export default class App extends React.Component {
               <View>
                 <StopWatch/>
               </View>
-            </Gradient>
               {/* Styled Image */}
-              {/* <Pyramid source={require("./app/assets/img/pyramid.svg")}/> */}
+              <Pyramid source={require("./app/assets/img/pyramid.svg")}/>
+            </Gradient>
           </Container>
         </Root>
       );
