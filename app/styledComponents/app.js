@@ -9,7 +9,6 @@ import Image from 'react-native-remote-svg'
 //Attach color props to the LinearGradient
 export const Gradient = styled(LinearGradient).attrs({
   colors: ['#392F83', '#33306A', '#252B45']
-  // colors: ['red', 'blue', 'yellow']
 })`
   position: relative;
   left: 0;
@@ -56,5 +55,4 @@ export const Pyramid = styled(Image)`
   bottom: 0;
   width: 100%;
   height: 55%;
-  zIndex: -1;
 `

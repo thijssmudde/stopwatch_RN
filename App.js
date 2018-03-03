@@ -58,7 +58,6 @@ export default class App extends React.Component {
                   <HeaderTitle>STOPWATCH</HeaderTitle>
                 </AppHeaderBody>
               </AppHeader>
-              <StopWatch/>
               <PyramidView>
                 {/* The svg doesnt show on Android, only when you scroll to the right */}
                 {/* <Pyramid source={Images.pyramidSVG}/> */}
@@ -66,6 +65,7 @@ export default class App extends React.Component {
                 {/*  */}
                 <Pyramid source={Images.pyramidPNG}/>
               </PyramidView>
+              <StopWatch/>
             </Gradient>
           </Container>
         </Root>
