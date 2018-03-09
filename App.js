@@ -58,12 +58,9 @@ export default class App extends React.Component {
                   <HeaderTitle>STOPWATCH</HeaderTitle>
                 </AppHeaderBody>
               </AppHeader>
+              {/* Styled View */}
               <PyramidView>
-                {/* The svg doesnt show on Android, only when you scroll to the right */}
-                {/* <Pyramid source={Images.pyramidSVG}/> */}
-
-                {/*  */}
-                {/* <Pyramid source={Images.pyramidPNG}/> */}
+                {/* Styled Image from react-native-remote-svg */}
                 <Pyramid source={Images.pyramidSVG}/>
               </PyramidView>
               <StopWatch/>
