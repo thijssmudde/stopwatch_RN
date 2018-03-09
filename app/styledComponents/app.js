@@ -6,6 +6,8 @@ import {LinearGradient, Constants} from 'expo'
 
 import Image from 'react-native-remote-svg'
 
+const {width, height} = Dimensions.get('window')
+
 //Attach color props to the LinearGradient
 export const Gradient = styled(LinearGradient).attrs({
   colors: ['#392F83', '#33306A', '#252B45']
@@ -14,8 +16,8 @@ export const Gradient = styled(LinearGradient).attrs({
   left: 0;
   right: 0;
   top: 0;
-  height: 100%;
-  width: 100%;
+  height: ${height}px;
+  width: ${width}px;
 `
 
 export const AppHeader = styled(Header)`
@@ -50,9 +52,12 @@ export const PyramidView = styled
   zIndex: -1;
 `
 
+const pyramidWidth = 603.13;
+const pyramidHeight = 557.82;
+
 export const Pyramid = styled(Image)`
   position: absolute;
   bottom: 0;
-  width: 100%;
-  height: 55%;
+  width: ${width}px;
+  height: ${width * pyramidHeight / pyramidWidth}px;
 `

@@ -1,6 +1,8 @@
 import styled from 'styled-components'
-import {Text, View} from 'react-native'
+import {Dimensions, Text, View} from 'react-native'
 import {Button, List, ListItem} from 'native-base'
+
+const {width, height} = Dimensions.get('window')
 
 export const StopWatchView = styled.View `
   top: 100;
@@ -23,7 +25,7 @@ export const StopWatchActions = styled.View `
 
 // Laps
 export const LapsView = styled.View `
-  width: 100%;
+width: ${width}px;
   marginLeft: 60;
 `
 

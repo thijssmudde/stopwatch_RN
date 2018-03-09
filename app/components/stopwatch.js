@@ -78,7 +78,7 @@ export default class StopWatch extends React.Component {
       this.setState({
         currentTime: moment().unix()
       })
-    }, 1000)
+    }, 500)
   }
 
   stop = () => { //Press STOP

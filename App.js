@@ -63,7 +63,8 @@ export default class App extends React.Component {
                 {/* <Pyramid source={Images.pyramidSVG}/> */}
 
                 {/*  */}
-                <Pyramid source={Images.pyramidPNG}/>
+                {/* <Pyramid source={Images.pyramidPNG}/> */}
+                <Pyramid source={Images.pyramidSVG}/>
               </PyramidView>
               <StopWatch/>
             </Gradient>
